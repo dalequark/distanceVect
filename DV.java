@@ -1,16 +1,18 @@
 import java.lang.Math;
+import java.lang.Integer;
 
 public class DV implements RoutingAlgorithm {
     
     static int LOCAL = -1;
     static int UNKNOWN = -2;
     static int INFINITY = 60; 
-    
+
+    static int EXPIRATION = 100;
+    static int EXPIRATION_INF = 100000;
     private Router router;
     private boolean allowExpire;
     private boolean allowPReverse;
     private int updateInterval;
-
     private RoutingTable table;
 
     public DV()
@@ -40,11 +42,39 @@ public class DV implements RoutingAlgorithm {
     
     public void initalise()
     {
+        // Assuming number of interfaces is set.
+        
+        Link[] links = router.getLinks();
+        int len = links.length;
+        // Get the id's of all routers directly connected to this router.
+        // Add them to the routing table.
+        for(int i = 0; i < len; i++)
+        {
+            // Which interface is this link attached to?
+            int interf = links[i].getInterface(0);
+            // What destination does it connect to?
+            int dest = links[i].getRouter(1);
+            int metric = links[i].getInterfaceWeight(dest);
+            DVRoutingTableEntry thisEntry = new DVRoutingTableEntry(dest, interf, metric, EXPIRATION);
+            table.addEntry(thisEntry);
+        }
+
+        // Add this router to the routing table.
+
+        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
+
     }
     
     public int getNextHop(int destination)
     {
-        return 0;
+        if(table.hasEntry(destination))
+        {
+            // For debugging
+            assert(table.getEntry(destination).getDestination() == destination);
+            return table.getEntry(destination).getInterface();
+        }
+        else
+            return UNKNOWN;
     }
     
     public void tidyTable()
@@ -52,19 +82,22 @@ public class DV implements RoutingAlgorithm {
     }
     
     public Packet generateRoutingPacket(int iface)
-    {
-        // Add every entry in the routing table to this payload
+    {   
+        // Add every entry in the routing table to this payload.
+        // Also, figure out getDestination
         Payload thisPayload = new Payload();
-        for(int i = 0; i < routingTable.numEntries(); i++)
+        for(int i = 0; i < table.numEntries(); i++)
         {
-            if(routingTable.hasEntry(i))
+            if(table.hasEntry(i))
             {
-                thisPayload.addEntry(routingTable.getEntry(i));
+                thisPayload.addEntry(table.getEntry(i));
             }
         }
 
         RoutingPacket thisPacket = new RoutingPacket(router.getId(), iface);
         thisPacket.setPayload(thisPayload);
+
+
     }
     
     public void processRoutingPacket(Packet p, int iface)
