@@ -1,5 +1,5 @@
 import java.lang.Math;
-import java.lang.Integer;
+import java.util.Enumeration;
 
 public class DV implements RoutingAlgorithm {
     
@@ -9,11 +9,13 @@ public class DV implements RoutingAlgorithm {
 
     static int EXPIRATION = 100;
     static int EXPIRATION_INF = 100000;
+
     private Router router;
     private boolean allowExpire;
     private boolean allowPReverse;
     private int updateInterval;
     private RoutingTable table;
+    private int[] interfaces;
 
     public DV()
     {
@@ -43,17 +45,25 @@ public class DV implements RoutingAlgorithm {
     public void initalise()
     {
         // Assuming number of interfaces is set.
-        
         Link[] links = router.getLinks();
-        int len = links.length;
+        System.out.println(links.toString());
+        System.out.println(router.toString());
+        int len = router.getNumInterfaces();
+        interfaces = new int[len];
+
         // Get the id's of all routers directly connected to this router.
         // Add them to the routing table.
         for(int i = 0; i < len; i++)
         {
-            // Which interface is this link attached to?
+            System.out.println(links[i]);
+            System.out.println(links.length);
+            // Which interface is this link attached to? Add to interface table
             int interf = links[i].getInterface(0);
             // What destination does it connect to?
             int dest = links[i].getRouter(1);
+
+            interfaces[interf] = dest;
+
             int metric = links[i].getInterfaceWeight(dest);
             DVRoutingTableEntry thisEntry = new DVRoutingTableEntry(dest, interf, metric, EXPIRATION);
             table.addEntry(thisEntry);
@@ -94,14 +104,42 @@ public class DV implements RoutingAlgorithm {
             }
         }
 
-        RoutingPacket thisPacket = new RoutingPacket(router.getId(), iface);
+        RoutingPacket thisPacket = new RoutingPacket(router.getId(), interfaces[iface]);
         thisPacket.setPayload(thisPayload);
-
+        return thisPacket;
 
     }
     
-    public void processRoutingPacket(Packet p, int iface)
+    public void processRoutingPacket(Packet packet, int iface)
     {
+        Payload thisPayload = packet.getPayload();
+        int linkWeight = router.getInterfaceWeight(iface);
+        Enumeration entries = thisPayload.getData().elements();
+        DVRoutingTableEntry thisEntry;
+        int dest;
+
+        while(entries.hasMoreElements())
+        {
+            thisEntry = (DVRoutingTableEntry)entries.nextElement();
+            dest = thisEntry.getDestination();
+
+            // If the path proposed by this packet is better than the one currently stored
+            // in the routing table, add it.
+
+            if( !table.hasEntry(dest) || ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()) )
+            {
+                // Update metric to take into account this hop
+                thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
+
+                // Change interface to be the interface on which we received this packet
+                thisEntry.setInterface(iface);
+
+                // Add the entry.
+                table.addEntry(thisEntry);
+            }
+
+        }
+
     }
     
     public void showRoutes()
