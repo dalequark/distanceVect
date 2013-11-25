@@ -44,34 +44,6 @@ public class DV implements RoutingAlgorithm {
     
     public void initalise()
     {
-        // Assuming number of interfaces is set.
-        Link[] links = router.getLinks();
-        System.out.println(links.toString());
-        System.out.println(router.toString());
-        int len = router.getNumInterfaces();
-        interfaces = new int[len];
-
-        // Get the id's of all routers directly connected to this router.
-        // Add them to the routing table.
-        for(int i = 0; i < len; i++)
-        {
-            System.out.println(links[i]);
-            System.out.println(links.length);
-            // Which interface is this link attached to? Add to interface table
-            int interf = links[i].getInterface(0);
-            // What destination does it connect to?
-            int dest = links[i].getRouter(1);
-
-            interfaces[interf] = dest;
-
-            int metric = links[i].getInterfaceWeight(dest);
-            DVRoutingTableEntry thisEntry = new DVRoutingTableEntry(dest, interf, metric, EXPIRATION);
-            table.addEntry(thisEntry);
-        }
-
-        // Add this router to the routing table.
-
-        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
 
     }
     
@@ -89,6 +61,7 @@ public class DV implements RoutingAlgorithm {
     
     public void tidyTable()
     {
+        addMyLinks();
     }
     
     public Packet generateRoutingPacket(int iface)
@@ -145,6 +118,37 @@ public class DV implements RoutingAlgorithm {
     public void showRoutes()
     {
     }
+
+    private void addMyLinks()
+    {
+        // Assuming number of interfaces is set.
+        Link[] links = router.getLinks();
+        int len = router.getNumInterfaces();
+        interfaces = new int[len];
+
+        // Get the id's of all routers directly connected to this router.
+        // Add them to the routing table.
+        for(int i = 0; i < len; i++)
+        {
+            if(links[i] != null)
+            {
+                // Which interface is this link attached to? Add to interface table
+                int interf = links[i].getInterface(0);
+                // What destination does it connect to?
+                int dest = links[i].getRouter(1);
+
+                interfaces[interf] = dest;
+
+                int metric = links[i].getInterfaceWeight(dest);
+                DVRoutingTableEntry thisEntry = new DVRoutingTableEntry(dest, interf, metric, EXPIRATION);
+                table.addEntry(thisEntry);
+            }
+        }
+
+        // Add this router to the routing table.
+
+        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
+    }
 }
 
 // This is basically a dynarray for storing DVRoutingTable Entries, where entries
@@ -170,12 +174,12 @@ class RoutingTable
         int id = entry.getDestination();
 
         // If this does not fit, expand the table.
-        if(routingTable.length < id)
+        if(routingTable.length - 1 < id)
         {
 
             // Find the nearest power of two that id is less than.
             int newSize;
-            for(newSize = 2; newSize < id; newSize = newSize*2){}
+            for(newSize = routingTable.length; newSize - 1 < id; newSize = newSize*2){}
 
             DVRoutingTableEntry[] newTable = new DVRoutingTableEntry[newSize];
             
@@ -188,7 +192,6 @@ class RoutingTable
             routingTable = newTable;
 
         }
-
         routingTable[id] = entry;
         numEntries++;
 
@@ -197,7 +200,7 @@ class RoutingTable
     // Has this destination already been logged in the table?
     public boolean hasEntry(int dest)
     {
-        if(routingTable[dest] == null)    return false;
+        if((dest >= routingTable.length) || (routingTable[dest] == null))    return false;
         else    return true;
     }
 
