@@ -34,12 +34,12 @@ public class DV implements RoutingAlgorithm {
     
     public void setAllowPReverse(boolean flag)
     {
-        allowPReverse = true;
+        allowPReverse = flag;
     }
     
     public void setAllowExpire(boolean flag)
     {
-        allowExpire = true;
+        allowExpire = flag;
     }
     
     public void initalise()
@@ -51,7 +51,11 @@ public class DV implements RoutingAlgorithm {
     {
         if(table.hasEntry(destination))
         {
-            return table.getEntry(destination).getInterface();
+            DVRoutingTableEntry thisEntry = table.getEntry(destination);
+            if(thisEntry.getMetric() >= INFINITY)
+                return UNKNOWN;
+            else
+                return thisEntry.getInterface();
         }
         else
             return UNKNOWN;
@@ -59,13 +63,38 @@ public class DV implements RoutingAlgorithm {
     
     public void tidyTable()
     {
-        //addMyLinks();
+        // Check to make sure that no links are down.
+
+        Link[] myLinks = router.getLinks();
+        for(int i = 0; i < myLinks.length; i++)
+        {
+            if(!myLinks[i].isUp())
+            {
+                int downIface;
+                if( myLinks[i].getRouter(0) == router.getId() )
+                    downIface = myLinks[i].getInterface(0);
+                else
+                    downIface = myLinks[i].getInterface(1);
+
+                DVRoutingTableEntry[] routingTable = table.getTable();
+                for(int j = 0; j < routingTable.length; j++)
+                {
+                    if(routingTable[j].getInterface() == downIface)
+                    {
+                        // If an interface is down, replace its entry with a metric of infinity
+                        DVRoutingTableEntry updatedEntry = DVRoutingTableEntry.fromEntry(routingTable[j]);
+                        updatedEntry.setMetric(INFINITY);
+                        table.addEntry(updatedEntry);
+                    }
+                }
+            }
+        }
+
     }
     
     public Packet generateRoutingPacket(int iface)
     {   
         // Add every entry in the routing table to this payload.
-        // Also, figure out getDestination
 
         Payload thisPayload = new Payload();
         DVRoutingTableEntry[] entries = table.getTable();
@@ -99,9 +128,11 @@ public class DV implements RoutingAlgorithm {
             dest = thisEntry.getDestination();
 
             // If the path proposed by this packet is better than the one currently stored
-            // in the routing table, add it.
+            // in the routing table, add it. Also, always adopt new value for metric for dest
+            // x if the interface we currently send to x over is iface.
 
-            if( !table.hasEntry(dest) || ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()) )
+            if( !table.hasEntry(dest) || (table.getEntry(dest).getInterface() == iface) ||
+                ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()))
             {
 
                 // Update metric to take into account this hop
@@ -220,6 +251,12 @@ class RoutingTable
         if(routingTable[dest] == null)   
             throw new Error("Entry does not yet exist in table");
         return DVRoutingTableEntry.fromEntry(routingTable[dest]);
+    }
+
+    public void removeEntry(int dest)
+    {
+        routingTable[dest] = null;
+        numEntries--;
     }
 
 
