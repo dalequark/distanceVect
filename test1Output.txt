@@ -1,0 +1,672 @@
+Loading configuration : test1.cfg
+Reading file test1.cfg
+Created Router 0 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 1 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 2 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 3 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 4 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Adding link Link (R0:0 I0:0 W0:1)<-->(R1:1 I1:0 W1:1)
+Adding link Link (R0:0 I0:0 W0:1)<-->(R1:1 I1:0 W1:1)
+Adding link Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Adding link Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Adding link Link (R0:2 I0:1 W0:1)<-->(R1:3 I1:0 W1:1)
+Adding link Link (R0:2 I0:1 W0:1)<-->(R1:3 I1:0 W1:1)
+Adding link Link (R0:3 I0:1 W0:1)<-->(R1:4 I1:1 W1:1)
+Adding link Link (R0:3 I0:1 W0:1)<-->(R1:4 I1:1 W1:1)
+Adding link Link (R0:0 I0:1 W0:3)<-->(R1:4 I1:0 W1:3)
+Adding link Link (R0:0 I0:1 W0:3)<-->(R1:4 I1:0 W1:3)
+Adding Event is send to occur at 10 with 0 3
+Adding Event is send to occur at 30 with 0 3
+Adding Event is downlink to occur at 15 with 1 1 2 0
+Adding Event is dumpPacketStats to occur at 1 with all
+Adding Event is dumprt to occur at 1 with all
+Adding Event is dumpPacketStats to occur at 2 with all
+Adding Event is dumprt to occur at 2 with all
+Adding Event is dumpPacketStats to occur at 3 with all
+Adding Event is dumprt to occur at 3 with all
+Adding Event is dumprt to occur at 4 with all
+Adding Event is dumprt to occur at 5 with all
+Adding Event is dumprt to occur at 6 with all
+Adding Event is dumprt to occur at 7 with all
+Adding Event is dumprt to occur at 8 with all
+Adding Event is dumprt to occur at 9 with all
+Adding Event is dumprt to occur at 10 with all
+Adding Event is dumprt to occur at 11 with all
+Adding Event is dumprt to occur at 12 with all
+Adding Event is dumprt to occur at 13 with all
+Adding Event is dumpPacketStats to occur at 14 with all
+Adding Event is dumprt to occur at 14 with all
+Adding Event is dumpPacketStats to occur at 21 with all
+Adding Event is dumprt to occur at 21 with all
+Adding Event is dumpPacketStats to occur at 22 with all
+Adding Event is dumprt to occur at 22 with all
+Adding Event is dumpPacketStats to occur at 23 with all
+Adding Event is dumprt to occur at 23 with all
+Adding Event is dumpPacketStats to occur at 24 with all
+Adding Event is dumprt to occur at 24 with all
+Time :1
+event Event is dumpPacketStats to occur at 1 with all
+Pkt stats for 0 :  s 0 r 0 d 0 f 0
+(R0:0 I0:0) s 0 r 0<-->(R1:1 I1:0) s 0 r 0
+(R0:0 I0:1) s 0 r 0<-->(R1:4 I1:0) s 0 r 0
+Pkt stats for 1 :  s 0 r 0 d 0 f 0
+(R0:0 I0:0) s 0 r 0<-->(R1:1 I1:0) s 0 r 0
+(R0:1 I0:1) s 0 r 0<-->(R1:2 I1:0) s 0 r 0
+Pkt stats for 2 :  s 0 r 0 d 0 f 0
+(R0:1 I0:1) s 0 r 0<-->(R1:2 I1:0) s 0 r 0
+(R0:2 I0:1) s 0 r 0<-->(R1:3 I1:0) s 0 r 0
+Pkt stats for 3 :  s 0 r 0 d 0 f 0
+(R0:2 I0:1) s 0 r 0<-->(R1:3 I1:0) s 0 r 0
+(R0:3 I0:1) s 0 r 0<-->(R1:4 I1:1) s 0 r 0
+Pkt stats for 4 :  s 0 r 0 d 0 f 0
+(R0:0 I0:1) s 0 r 0<-->(R1:4 I1:0) s 0 r 0
+(R0:3 I0:1) s 0 r 0<-->(R1:4 I1:1) s 0 r 0
+Time :2
+event Event is dumpPacketStats to occur at 2 with all
+Pkt stats for 0 :  s 2 r 0 d 0 f 0
+(R0:0 I0:0) s 1 r 0<-->(R1:1 I1:0) s 1 r 0
+(R0:0 I0:1) s 1 r 0<-->(R1:4 I1:0) s 1 r 0
+Pkt stats for 1 :  s 2 r 0 d 0 f 0
+(R0:0 I0:0) s 1 r 0<-->(R1:1 I1:0) s 1 r 0
+(R0:1 I0:1) s 1 r 0<-->(R1:2 I1:0) s 1 r 0
+Pkt stats for 2 :  s 2 r 0 d 0 f 0
+(R0:1 I0:1) s 1 r 0<-->(R1:2 I1:0) s 1 r 0
+(R0:2 I0:1) s 1 r 0<-->(R1:3 I1:0) s 1 r 0
+Pkt stats for 3 :  s 2 r 0 d 0 f 0
+(R0:2 I0:1) s 1 r 0<-->(R1:3 I1:0) s 1 r 0
+(R0:3 I0:1) s 1 r 0<-->(R1:4 I1:1) s 1 r 0
+Pkt stats for 4 :  s 2 r 0 d 0 f 0
+(R0:0 I0:1) s 1 r 0<-->(R1:4 I1:0) s 1 r 0
+(R0:3 I0:1) s 1 r 0<-->(R1:4 I1:1) s 1 r 0
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :3
+event Event is dumpPacketStats to occur at 3 with all
+Pkt stats for 0 :  s 4 r 1 d 0 f 1
+(R0:0 I0:0) s 3 r 1<-->(R1:1 I1:0) s 2 r 1
+(R0:0 I0:1) s 2 r 1<-->(R1:4 I1:0) s 2 r 1
+Pkt stats for 1 :  s 4 r 1 d 1 f 0
+(R0:0 I0:0) s 3 r 1<-->(R1:1 I1:0) s 2 r 1
+(R0:1 I0:1) s 2 r 1<-->(R1:2 I1:0) s 2 r 1
+Pkt stats for 2 :  s 4 r 1 d 1 f 0
+(R0:1 I0:1) s 2 r 1<-->(R1:2 I1:0) s 2 r 1
+(R0:2 I0:1) s 2 r 1<-->(R1:3 I1:0) s 2 r 1
+Pkt stats for 3 :  s 4 r 1 d 0 f 1
+(R0:2 I0:1) s 2 r 1<-->(R1:3 I1:0) s 2 r 1
+(R0:3 I0:1) s 3 r 1<-->(R1:4 I1:1) s 2 r 1
+Pkt stats for 4 :  s 4 r 2 d 0 f 0
+(R0:0 I0:1) s 2 r 1<-->(R1:4 I1:0) s 2 r 1
+(R0:3 I0:1) s 3 r 1<-->(R1:4 I1:1) s 2 r 1
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :4
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :5
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :6
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :7
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :8
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :9
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :10
+Dropping packet src 0 dst 3 type 1 ttl 255 seq 1 path
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :11
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :12
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :13
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :14
+event Event is dumpPacketStats to occur at 14 with all
+Pkt stats for 0 :  s 27 r 12 d 1 f 12
+(R0:0 I0:0) s 25 r 12<-->(R1:1 I1:0) s 13 r 23
+(R0:0 I0:1) s 13 r 12<-->(R1:4 I1:0) s 13 r 12
+Pkt stats for 1 :  s 26 r 23 d 12 f 0
+(R0:0 I0:0) s 25 r 12<-->(R1:1 I1:0) s 13 r 23
+(R0:1 I0:1) s 13 r 12<-->(R1:2 I1:0) s 13 r 12
+Pkt stats for 2 :  s 26 r 12 d 12 f 0
+(R0:1 I0:1) s 13 r 12<-->(R1:2 I1:0) s 13 r 12
+(R0:2 I0:1) s 13 r 12<-->(R1:3 I1:0) s 13 r 12
+Pkt stats for 3 :  s 26 r 12 d 0 f 12
+(R0:2 I0:1) s 13 r 12<-->(R1:3 I1:0) s 13 r 12
+(R0:3 I0:1) s 25 r 12<-->(R1:4 I1:1) s 13 r 23
+Pkt stats for 4 :  s 26 r 35 d 0 f 0
+(R0:0 I0:1) s 13 r 12<-->(R1:4 I1:0) s 13 r 12
+(R0:3 I0:1) s 25 r 12<-->(R1:4 I1:1) s 13 r 23
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+Time :15
+Setting link status to down Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 2 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 2 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 1
+size of out1 1
+Time :16
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 2
+size of out1 2
+Time :17
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 3
+size of out1 3
+Time :18
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 4
+size of out1 4
+Time :19
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 5
+size of out1 5
+Time :20
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 6
+size of out1 6
+Time :21
+event Event is dumpPacketStats to occur at 21 with all
+Pkt stats for 0 :  s 41 r 19 d 1 f 19
+(R0:0 I0:0) s 39 r 19<-->(R1:1 I1:0) s 20 r 37
+(R0:0 I0:1) s 20 r 19<-->(R1:4 I1:0) s 20 r 19
+Pkt stats for 1 :  s 40 r 37 d 14 f 0
+(R0:0 I0:0) s 39 r 19<-->(R1:1 I1:0) s 20 r 37
+(R0:1 I0:1) s 20 r 14<-->(R1:2 I1:0) s 20 r 14
+Pkt stats for 2 :  s 40 r 14 d 19 f 0
+(R0:1 I0:1) s 20 r 14<-->(R1:2 I1:0) s 20 r 14
+(R0:2 I0:1) s 20 r 19<-->(R1:3 I1:0) s 20 r 19
+Pkt stats for 3 :  s 40 r 19 d 0 f 19
+(R0:2 I0:1) s 20 r 19<-->(R1:3 I1:0) s 20 r 19
+(R0:3 I0:1) s 39 r 19<-->(R1:4 I1:1) s 20 r 37
+Pkt stats for 4 :  s 40 r 56 d 0 f 0
+(R0:0 I0:1) s 20 r 19<-->(R1:4 I1:0) s 20 r 19
+(R0:3 I0:1) s 39 r 19<-->(R1:4 I1:1) s 20 r 37
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 7
+size of out1 7
+Time :22
+event Event is dumpPacketStats to occur at 22 with all
+Pkt stats for 0 :  s 43 r 20 d 1 f 20
+(R0:0 I0:0) s 41 r 20<-->(R1:1 I1:0) s 21 r 39
+(R0:0 I0:1) s 21 r 20<-->(R1:4 I1:0) s 21 r 20
+Pkt stats for 1 :  s 42 r 39 d 14 f 0
+(R0:0 I0:0) s 41 r 20<-->(R1:1 I1:0) s 21 r 39
+(R0:1 I0:1) s 21 r 14<-->(R1:2 I1:0) s 21 r 14
+Pkt stats for 2 :  s 42 r 14 d 20 f 0
+(R0:1 I0:1) s 21 r 14<-->(R1:2 I1:0) s 21 r 14
+(R0:2 I0:1) s 21 r 20<-->(R1:3 I1:0) s 21 r 20
+Pkt stats for 3 :  s 42 r 20 d 0 f 20
+(R0:2 I0:1) s 21 r 20<-->(R1:3 I1:0) s 21 r 20
+(R0:3 I0:1) s 41 r 20<-->(R1:4 I1:1) s 21 r 39
+Pkt stats for 4 :  s 42 r 59 d 0 f 0
+(R0:0 I0:1) s 21 r 20<-->(R1:4 I1:0) s 21 r 20
+(R0:3 I0:1) s 41 r 20<-->(R1:4 I1:1) s 21 r 39
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 8
+size of out1 8
+Time :23
+event Event is dumpPacketStats to occur at 23 with all
+Pkt stats for 0 :  s 45 r 21 d 1 f 21
+(R0:0 I0:0) s 43 r 21<-->(R1:1 I1:0) s 22 r 41
+(R0:0 I0:1) s 22 r 21<-->(R1:4 I1:0) s 22 r 21
+Pkt stats for 1 :  s 44 r 41 d 14 f 0
+(R0:0 I0:0) s 43 r 21<-->(R1:1 I1:0) s 22 r 41
+(R0:1 I0:1) s 22 r 14<-->(R1:2 I1:0) s 22 r 14
+Pkt stats for 2 :  s 44 r 14 d 21 f 0
+(R0:1 I0:1) s 22 r 14<-->(R1:2 I1:0) s 22 r 14
+(R0:2 I0:1) s 22 r 21<-->(R1:3 I1:0) s 22 r 21
+Pkt stats for 3 :  s 44 r 21 d 0 f 21
+(R0:2 I0:1) s 22 r 21<-->(R1:3 I1:0) s 22 r 21
+(R0:3 I0:1) s 43 r 21<-->(R1:4 I1:1) s 22 r 41
+Pkt stats for 4 :  s 44 r 62 d 0 f 0
+(R0:0 I0:1) s 22 r 21<-->(R1:4 I1:0) s 22 r 21
+(R0:3 I0:1) s 43 r 21<-->(R1:4 I1:1) s 22 r 41
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 9
+size of out1 9
+Time :24
+event Event is dumpPacketStats to occur at 24 with all
+Pkt stats for 0 :  s 47 r 22 d 1 f 22
+(R0:0 I0:0) s 45 r 22<-->(R1:1 I1:0) s 23 r 43
+(R0:0 I0:1) s 23 r 22<-->(R1:4 I1:0) s 23 r 22
+Pkt stats for 1 :  s 46 r 43 d 14 f 0
+(R0:0 I0:0) s 45 r 22<-->(R1:1 I1:0) s 23 r 43
+(R0:1 I0:1) s 23 r 14<-->(R1:2 I1:0) s 23 r 14
+Pkt stats for 2 :  s 46 r 14 d 22 f 0
+(R0:1 I0:1) s 23 r 14<-->(R1:2 I1:0) s 23 r 14
+(R0:2 I0:1) s 23 r 22<-->(R1:3 I1:0) s 23 r 22
+Pkt stats for 3 :  s 46 r 22 d 0 f 22
+(R0:2 I0:1) s 23 r 22<-->(R1:3 I1:0) s 23 r 22
+(R0:3 I0:1) s 45 r 22<-->(R1:4 I1:1) s 23 r 43
+Pkt stats for 4 :  s 46 r 65 d 0 f 0
+(R0:0 I0:1) s 23 r 22<-->(R1:4 I1:0) s 23 r 22
+(R0:3 I0:1) s 45 r 22<-->(R1:4 I1:1) s 23 r 43
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 10
+size of out1 10
+Time :25
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 11
+size of out1 11
+Time :26
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 12
+size of out1 12
+Time :27
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 13
+size of out1 13
+Time :28
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 14
+size of out1 14
+Time :29
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 15
+size of out1 15
+Time :30
+Dropping packet src 0 dst 3 type 1 ttl 255 seq 2 path
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 16
+size of out1 16
+Time :31
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 17
+size of out1 17
+Time :32
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 18
+size of out1 18
+Time :33
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 19
+size of out1 19
+Time :34
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 20
+size of out1 20
+Time :35
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 21
+size of out1 21
+Time :36
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 22
+size of out1 22
+Time :37
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 23
+size of out1 23
+Time :38
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 24
+size of out1 24
+Time :39
+Forwarded packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 4 dst 0 type 2 ttl 255 seq 0
+Received packet src 1 dst 1 type 2 ttl 254 seq 0
+Received packet src 0 dst 1 type 2 ttl 255 seq 0
+Dropping packet src 3 dst 0 type 2 ttl 255 seq 0
+Received packet src 2 dst 3 type 2 ttl 255 seq 0
+Forwarded packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 0 dst 4 type 2 ttl 255 seq 0
+Received packet src 4 dst 4 type 2 ttl 254 seq 0
+Received packet src 3 dst 4 type 2 ttl 255 seq 0
+size of out0 25
+size of out1 25

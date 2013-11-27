@@ -44,15 +44,13 @@ public class DV implements RoutingAlgorithm {
     
     public void initalise()
     {
-
+        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
     }
     
     public int getNextHop(int destination)
     {
         if(table.hasEntry(destination))
         {
-            // For debugging
-            assert(table.getEntry(destination).getDestination() == destination);
             return table.getEntry(destination).getInterface();
         }
         else
@@ -61,23 +59,23 @@ public class DV implements RoutingAlgorithm {
     
     public void tidyTable()
     {
-        addMyLinks();
+        //addMyLinks();
     }
     
     public Packet generateRoutingPacket(int iface)
     {   
         // Add every entry in the routing table to this payload.
         // Also, figure out getDestination
+
         Payload thisPayload = new Payload();
-        for(int i = 0; i < table.numEntries(); i++)
+        DVRoutingTableEntry[] entries = table.getTable();
+
+        for(int i = 0; i < entries.length; i++)
         {
-            if(table.hasEntry(i))
-            {
-                thisPayload.addEntry(table.getEntry(i));
-            }
+            thisPayload.addEntry(entries[i]);
         }
 
-        RoutingPacket thisPacket = new RoutingPacket(router.getId(), interfaces[iface]);
+        RoutingPacket thisPacket = new RoutingPacket(router.getId(), Packet.BROADCAST);
         thisPacket.setPayload(thisPayload);
         return thisPacket;
 
@@ -85,6 +83,10 @@ public class DV implements RoutingAlgorithm {
     
     public void processRoutingPacket(Packet packet, int iface)
     {
+        // Do not process packets I send to myself
+        if(packet.getSource() == router.getId())
+            return;
+
         Payload thisPayload = packet.getPayload();
         int linkWeight = router.getInterfaceWeight(iface);
         Enumeration entries = thisPayload.getData().elements();
@@ -101,6 +103,11 @@ public class DV implements RoutingAlgorithm {
 
             if( !table.hasEntry(dest) || ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()) )
             {
+                System.out.println(String.format("Router: %d Destination: %d New weight: %d", 
+                    router.getId(), dest, thisEntry.getMetric() + linkWeight));
+                if(table.hasEntry(dest))
+                    System.out.println("Old entry was " + table.getEntry(dest));
+
                 // Update metric to take into account this hop
                 thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
 
@@ -108,7 +115,7 @@ public class DV implements RoutingAlgorithm {
                 thisEntry.setInterface(iface);
 
                 // Add the entry.
-                table.addEntry(thisEntry);
+                table.addEntry(DVRoutingTableEntry.fromEntry(thisEntry));
             }
 
         }
@@ -117,38 +124,20 @@ public class DV implements RoutingAlgorithm {
     
     public void showRoutes()
     {
-    }
-
-    private void addMyLinks()
-    {
-        // Assuming number of interfaces is set.
-        Link[] links = router.getLinks();
-        int len = router.getNumInterfaces();
-        interfaces = new int[len];
-
-        // Get the id's of all routers directly connected to this router.
-        // Add them to the routing table.
-        for(int i = 0; i < len; i++)
+        System.out.println("Router " + router.getId());
+        DVRoutingTableEntry[] thisTable = table.getTable();
+        for(int i = 0; i < thisTable.length; i++)
         {
-            if(links[i] != null)
+            if(thisTable[i] == null)
             {
-                // Which interface is this link attached to? Add to interface table
-                int interf = links[i].getInterface(0);
-                // What destination does it connect to?
-                int dest = links[i].getRouter(1);
-
-                interfaces[interf] = dest;
-
-                int metric = links[i].getInterfaceWeight(dest);
-                DVRoutingTableEntry thisEntry = new DVRoutingTableEntry(dest, interf, metric, EXPIRATION);
-                table.addEntry(thisEntry);
+                System.out.println("Entry " + i + " was *null*!");
             }
+            else
+                System.out.println(thisTable[i].toString());
         }
-
-        // Add this router to the routing table.
-
-        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
     }
+
+
 }
 
 // This is basically a dynarray for storing DVRoutingTable Entries, where entries
@@ -168,6 +157,27 @@ class RoutingTable
     {
         return numEntries;
     }
+
+    // Takes this dynamically expanding array and returns a normal array
+    // (in which entries are no longer indexed by destination)
+
+    public DVRoutingTableEntry[] getTable()
+    {
+        DVRoutingTableEntry[] table = new DVRoutingTableEntry[numEntries];
+        int j = 0;
+        for(int i = 0; i < routingTable.length; i++)
+        {
+            if(hasEntry(i))
+            {
+                table[j] = getEntry(i);
+                j++;
+            }
+            
+        }
+
+        return table;
+    }
+
 
     public void addEntry(DVRoutingTableEntry entry)
     {
@@ -210,7 +220,7 @@ class RoutingTable
     {
         if(routingTable[dest] == null)   
             throw new Error("Entry does not yet exist in table");
-        return routingTable[dest];
+        return DVRoutingTableEntry.fromEntry(routingTable[dest]);
     }
 
 
@@ -230,6 +240,13 @@ class DVRoutingTableEntry implements RoutingTableEntry
         metric = m;
         time = t;
 	}
+
+    // Copy constructor
+
+    public static DVRoutingTableEntry fromEntry(DVRoutingTableEntry oldEntry)
+    {
+        return new DVRoutingTableEntry(oldEntry.destination, oldEntry.interf, oldEntry.metric, oldEntry.time);
+    }
 
     public int getDestination() {
         return destination;
