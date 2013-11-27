@@ -103,10 +103,6 @@ public class DV implements RoutingAlgorithm {
 
             if( !table.hasEntry(dest) || ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()) )
             {
-                System.out.println(String.format("Router: %d Destination: %d New weight: %d", 
-                    router.getId(), dest, thisEntry.getMetric() + linkWeight));
-                if(table.hasEntry(dest))
-                    System.out.println("Old entry was " + table.getEntry(dest));
 
                 // Update metric to take into account this hop
                 thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
@@ -165,14 +161,16 @@ class RoutingTable
     {
         DVRoutingTableEntry[] table = new DVRoutingTableEntry[numEntries];
         int j = 0;
+        int entriesFound = 0;
         for(int i = 0; i < routingTable.length; i++)
         {
+            if(routingTable[i] != null)
+                entriesFound++;
             if(hasEntry(i))
             {
                 table[j] = getEntry(i);
                 j++;
             }
-            
         }
 
         return table;
@@ -202,8 +200,9 @@ class RoutingTable
             routingTable = newTable;
 
         }
+        // If this is a new destination, increment numEntries
+        if(routingTable[id] == null)    numEntries++;
         routingTable[id] = entry;
-        numEntries++;
 
     }
 
