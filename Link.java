@@ -126,7 +126,7 @@ public class Link
 		    out[1].removeElement(p);
 		}
 	    }
-	    if (out[0].size() != 0) { System.out.println("size of out0 "+out[0].size()); }
+	    if (out[0].size() != 0) { System.out.println("size of out0 "+out[0].size() + " on link " + this + out[0].firstElement()); }
 	    if (out[1].size() != 0) { System.out.println("size of out1 "+out[1].size()); }
 
 	}

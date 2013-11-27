@@ -52,7 +52,7 @@ public class DV implements RoutingAlgorithm {
         if(table.hasEntry(destination))
         {
             DVRoutingTableEntry thisEntry = table.getEntry(destination);
-            if(thisEntry.getMetric() >= INFINITY)
+            if(thisEntry.getMetric() >= INFINITY || !router.getInterfaceState(thisEntry.getInterface()))
                 return UNKNOWN;
             else
                 return thisEntry.getInterface();
@@ -94,8 +94,11 @@ public class DV implements RoutingAlgorithm {
     
     public Packet generateRoutingPacket(int iface)
     {   
+        if(!router.getInterfaceState(iface))
+        {
+            return null;
+        }
         // Add every entry in the routing table to this payload.
-
         Payload thisPayload = new Payload();
         DVRoutingTableEntry[] entries = table.getTable();
 
@@ -155,12 +158,7 @@ public class DV implements RoutingAlgorithm {
         DVRoutingTableEntry[] thisTable = table.getTable();
         for(int i = 0; i < thisTable.length; i++)
         {
-            if(thisTable[i] == null)
-            {
-                System.out.println("Entry " + i + " was *null*!");
-            }
-            else
-                System.out.println(thisTable[i].toString());
+            System.out.println(thisTable[i].toString());
         }
     }
 
