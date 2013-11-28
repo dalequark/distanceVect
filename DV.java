@@ -104,7 +104,12 @@ public class DV implements RoutingAlgorithm {
 
         for(int i = 0; i < entries.length; i++)
         {
-            thisPayload.addEntry(entries[i]);
+            DVRoutingTableEntry thisEntry = entries[i];
+            if(thisEntry.getInterface() == iface && allowPReverse)
+            {
+                thisEntry.setMetric(INFINITY);
+            }
+           thisPayload.addEntry(thisEntry);
         }
 
         RoutingPacket thisPacket = new RoutingPacket(router.getId(), Packet.BROADCAST);
