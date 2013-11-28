@@ -7,7 +7,6 @@ public class DV implements RoutingAlgorithm {
     static int UNKNOWN = -2;
     static int INFINITY = 60; 
 
-    static int EXPIRATION = 100;
     static int EXPIRATION_INF = 100000;
 
     private Router router;
@@ -84,10 +83,21 @@ public class DV implements RoutingAlgorithm {
                         // If an interface is down, replace its entry with a metric of infinity
                         DVRoutingTableEntry updatedEntry = DVRoutingTableEntry.fromEntry(routingTable[j]);
                         updatedEntry.setMetric(INFINITY);
+                        updatedEntry.setTime(router.getCurrentTime());
                         table.addEntry(updatedEntry);
                     }
+
+                    if(allowExpire && routingTable[j].getMetric() == INFINITY)
+                    {
+                        if(router.getCurrentTime() - routingTable[j].getTime() > updateInterval)
+                        {
+                            table.removeEntry(routingTable[j].getDestination());
+                        }
+                    }
+
                 }
             }
+
         }
 
     }
@@ -149,10 +159,10 @@ public class DV implements RoutingAlgorithm {
                 // Change interface to be the interface on which we received this packet
                 thisEntry.setInterface(iface);
 
+                thisEntry.setTime(-1);
                 // Add the entry.
                 table.addEntry(DVRoutingTableEntry.fromEntry(thisEntry));
             }
-
         }
 
     }
