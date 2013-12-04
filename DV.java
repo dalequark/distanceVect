@@ -7,8 +7,6 @@ public class DV implements RoutingAlgorithm {
     static int UNKNOWN = -2;
     static int INFINITY = 60; 
 
-    static int EXPIRATION_INF = 100000;
-
     private Router router;
     private boolean allowExpire;
     private boolean allowPReverse;
@@ -32,8 +30,8 @@ public class DV implements RoutingAlgorithm {
     public void setUpdateInterval(int u)
     {
         updateInterval = u;
-        timeout = u;
-        gc = -1;
+        timeout = u*4;
+        gc = u*3;
     }
     
     public void setAllowPReverse(boolean flag)
@@ -48,7 +46,7 @@ public class DV implements RoutingAlgorithm {
     
     public void initalise()
     {
-        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, EXPIRATION_INF));
+        table.addEntry(new DVRoutingTableEntry(router.getId(), LOCAL, 0, 1));
     }
     
     public int getNextHop(int destination)
@@ -67,6 +65,8 @@ public class DV implements RoutingAlgorithm {
     
     public void tidyTable()
     {
+        int t1 = router.getCurrentTime();
+        
         // Check to make sure that no links are down.
 
         Link[] myLinks = router.getLinks();
@@ -83,18 +83,19 @@ public class DV implements RoutingAlgorithm {
                 DVRoutingTableEntry[] routingTable = table.getTable();
                 for(int j = 0; j < routingTable.length; j++)
                 {
-                    if(routingTable[j].getInterface() == downIface)
+                    if(routingTable[j].getMetric() != INFINITY && routingTable[j].getInterface() == downIface)
                     {
                         // If an interface is down, replace its entry with a metric of infinity
+                        
                         DVRoutingTableEntry updatedEntry = DVRoutingTableEntry.fromEntry(routingTable[j]);
                         updatedEntry.setMetric(INFINITY);
-                        updatedEntry.setTime(router.getCurrentTime());
+                        updatedEntry.setTime(t1);
                         table.addEntry(updatedEntry);
+                        
                     }
 
                 }
-            }
-
+            } 
         }
 
         // expire stale entries
@@ -102,27 +103,32 @@ public class DV implements RoutingAlgorithm {
         {
             DVRoutingTableEntry[] routingTable = table.getTable();
             DVRoutingTableEntry thisEntry;
-            int t0, t1;
+            int t0;
+            
             for(int i = 0; i < routingTable.length; i++)
             {
                 thisEntry = routingTable[i];
                 t0 = thisEntry.getTime();
-                t1 = router.getCurrentTime();
 
                 // GC timer
-                if(thisEntry.getMetric() == INFINITY && (t1 - t0 > gc)) 
+                if(thisEntry.getMetric() == INFINITY && ((t1 - t0) > gc))
+                {
                     table.removeEntry(thisEntry.getDestination());
+                } 
 
                 // timeout timer
-                else if(t1 - t0 > timeout)
+                /*
+                else if( ((t1 - t0) > timeout) && thisEntry.getInterface() != LOCAL)
                 {
                     thisEntry.setMetric(INFINITY);
                     thisEntry.setTime(t1);
                     table.addEntry(thisEntry);
-                }
+                }*/
                     
             }
         }
+
+        
 
     }
     
@@ -179,17 +185,20 @@ public class DV implements RoutingAlgorithm {
                 ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()))
             {
 
-
+                // Do not add an entry that is infinity unless its invalidating a previous route.
+                if(allowExpire && thisEntry.getMetric() == INFINITY && !table.hasEntry(dest))   continue;
+                if(table.hasEntry(thisEntry.getDestination()) && table.getEntry(thisEntry.getDestination()).getMetric() == INFINITY)    continue;
+                
                 if(thisEntry.getMetric() != INFINITY)
                     thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
 
                 // if we got an update repeating that our entry to dest is stale,
                 // do not change the table (i.e. interrupt GC timer)
 
-                //else if(allowExpire && table.hasEntry(dest) && table.getEntry(dest).getMetric() == INFINITY)   continue;
 
                 // Change interface to be the interface on which we received this packet
                 thisEntry.setInterface(iface);
+
 
                 thisEntry.setTime(router.getCurrentTime());
                 // Add the entry.
@@ -315,12 +324,12 @@ class DVRoutingTableEntry implements RoutingTableEntry
     private int time;
 
     public DVRoutingTableEntry(int d, int i, int m, int t)
-	{
+    {
         destination = d;
         interf = i;
         metric = m;
         time = t;
-	}
+    }
 
     // Copy constructor
 
@@ -355,8 +364,8 @@ class DVRoutingTableEntry implements RoutingTableEntry
     }
     
     public String toString() 
-	{
-	    return String.format("d %d i %d m %d", destination, interf, metric);
-	}
+    {
+        return String.format("d %d i %d m %d", destination, interf, metric);
+    }
 }
 
