@@ -185,12 +185,20 @@ public class DV implements RoutingAlgorithm {
                 ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()))
             {
 
-                // Do not add an entry that is infinity unless its invalidating a previous route.
-                if(allowExpire && thisEntry.getMetric() == INFINITY && !table.hasEntry(dest))   continue;
-                if(table.hasEntry(thisEntry.getDestination()) && table.getEntry(thisEntry.getDestination()).getMetric() == INFINITY)    continue;
+                if(allowExpire && thisEntry.getMetric() == INFINITY)
+                {
+                    // Do not add an entry that is infinity unless its invalidating a previous route.
+                    if(!table.hasEntry(dest))   continue;
+
+                    // If route to a path was already infinity and this is infinity as well, to not reset the gc timer
+                    if(table.hasEntry(thisEntry.getDestination()) && table.getEntry(thisEntry.getDestination()).getMetric() == INFINITY)    continue;
+                }
                 
                 if(thisEntry.getMetric() != INFINITY)
-                    thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
+                {
+                    int newWeight = thisEntry.getMetric() + linkWeight;
+                    thisEntry.setMetric(newWeight > INFINITY ? INFINITY : newWeight);
+                }
 
                 // if we got an update repeating that our entry to dest is stale,
                 // do not change the table (i.e. interrupt GC timer)
