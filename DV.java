@@ -16,6 +16,9 @@ public class DV implements RoutingAlgorithm {
     private RoutingTable table;
     private int[] interfaces;
 
+    private int timeout;
+    private int gc;
+
     public DV()
     {
         table = new RoutingTable();
@@ -29,6 +32,8 @@ public class DV implements RoutingAlgorithm {
     public void setUpdateInterval(int u)
     {
         updateInterval = u;
+        timeout = u;
+        gc = -1;
     }
     
     public void setAllowPReverse(boolean flag)
@@ -87,17 +92,36 @@ public class DV implements RoutingAlgorithm {
                         table.addEntry(updatedEntry);
                     }
 
-                    if(allowExpire && routingTable[j].getMetric() == INFINITY)
-                    {
-                        if(router.getCurrentTime() - routingTable[j].getTime() > updateInterval)
-                        {
-                            table.removeEntry(routingTable[j].getDestination());
-                        }
-                    }
-
                 }
             }
 
+        }
+
+        // expire stale entries
+        if(allowExpire)
+        {
+            DVRoutingTableEntry[] routingTable = table.getTable();
+            DVRoutingTableEntry thisEntry;
+            int t0, t1;
+            for(int i = 0; i < routingTable.length; i++)
+            {
+                thisEntry = routingTable[i];
+                t0 = thisEntry.getTime();
+                t1 = router.getCurrentTime();
+
+                // GC timer
+                if(thisEntry.getMetric() == INFINITY && (t1 - t0 > gc)) 
+                    table.removeEntry(thisEntry.getDestination());
+
+                // timeout timer
+                else if(t1 - t0 > timeout)
+                {
+                    thisEntry.setMetric(INFINITY);
+                    thisEntry.setTime(t1);
+                    table.addEntry(thisEntry);
+                }
+                    
+            }
         }
 
     }
@@ -147,19 +171,27 @@ public class DV implements RoutingAlgorithm {
 
             // If the path proposed by this packet is better than the one currently stored
             // in the routing table, add it. Also, always adopt new value for metric for dest
-            // x if the interface we currently send to x over is iface.
+            // x if the interface we currently send to x over is iface. Do not add a value 
+            // if its metric is infinity if it is not in the routing table.
 
-            if( !table.hasEntry(dest) || (table.getEntry(dest).getInterface() == iface) ||
+            if( !table.hasEntry(dest)  || 
+                (table.getEntry(dest).getInterface() == iface) ||
                 ((thisEntry.getMetric() + linkWeight) < table.getEntry(dest).getMetric()))
             {
 
-                // Update metric to take into account this hop
-                thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
+
+                if(thisEntry.getMetric() != INFINITY)
+                    thisEntry.setMetric(thisEntry.getMetric() + linkWeight);
+
+                // if we got an update repeating that our entry to dest is stale,
+                // do not change the table (i.e. interrupt GC timer)
+
+                //else if(allowExpire && table.hasEntry(dest) && table.getEntry(dest).getMetric() == INFINITY)   continue;
 
                 // Change interface to be the interface on which we received this packet
                 thisEntry.setInterface(iface);
 
-                thisEntry.setTime(-1);
+                thisEntry.setTime(router.getCurrentTime());
                 // Add the entry.
                 table.addEntry(DVRoutingTableEntry.fromEntry(thisEntry));
             }
